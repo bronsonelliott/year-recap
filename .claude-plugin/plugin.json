@@ -1,7 +1,7 @@
 {
   "name": "year-recap",
   "description": "Ask Claude Code for your year and get a private page about it: fun slides, the story, and the lessons.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": { "name": "bronsonelliott" },
   "license": "MIT"
 }

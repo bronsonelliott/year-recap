@@ -117,9 +117,21 @@ The filter for passwords and keys can also miss things: an unusual format, or a 
 
 ## Why early months can be thin
 
-Claude Code deletes session transcripts after 30 days unless you change a setting. Sessions you started or last continued in the Claude desktop app are the exception: recent versions keep those. What you typed is kept either way, so the recap can still tell those months with less detail. Each month on the page shows how much survived.
+Claude Code deletes session transcripts after 30 days unless you raise a setting called `cleanupPeriodDays`. Sessions you started or last continued in the Claude desktop app are the exception: Claude Code 2.1.248 and later keep those. What you typed is kept either way, so the recap can still tell those months with less detail. Each month on the page is labeled "full detail", "partial detail" or "no records found".
 
-To keep transcripts longer from now on, ask Claude Code: "Set cleanupPeriodDays to 365 in my user settings." It applies to new sessions and can't bring back what is already deleted. The recap never changes your settings.
+To keep transcripts longer, change it now. It only protects what is still on your computer, so every day you wait, another day of transcripts is deleted. The easiest way is to ask Claude Code:
+
+> Set cleanupPeriodDays to 365 in my user settings.
+
+The setting lives in your user settings file, `~/.claude/settings.json`. It is the number of days Claude Code keeps a transcript. The default is 30 and the lowest allowed value is 1. To set it by hand, add this line right after the file's first `{`:
+
+```json
+"cleanupPeriodDays": 365,
+```
+
+Keep the comma if other settings come after it. Drop it if nothing does.
+
+Raising it can't bring back transcripts already deleted. Desktop app sessions have their own setting, `desktopSessionCleanupPeriodDays`, which you only need if you want those deleted. The recap never changes your settings.
 
 ## How it stays honest
 
