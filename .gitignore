@@ -1,0 +1,16 @@
+# Local notes: private terms and project state, never published
+CLAUDE.md
+MEMORY.md
+
+# Real history and generated recaps never belong here
+*.jsonl
+!tests/fixtures/**/*.jsonl
+recap*.html
+!example/recap.html
+story*.json
+!example/story.json
+.claude-year-recap/
+
+__pycache__/
+*.pyc
+.DS_Store
