@@ -19,7 +19,9 @@ If that path wasn't filled in above, use the full path of the folder this file i
 
 **If a command prints `Stopped:`**, do what the message says. If it ends in a Python traceback instead, show the person the last line and stop. Never edit the files it saves, apart from the ones these steps tell you to write.
 
-**If they want to pick up an earlier recap**, run `status` first. When it names unread batches, go on from step 4. When it says to write the story, go on from step 5. Don't run `candidates` or `collect` again unless they want newer history included.
+**If they want to pick up an earlier recap**, run `status` first. When it names unread batches, go on from step 4. When it says to write the story, go on from step 5. Don't run `candidates` or `collect` again unless they want newer history included, or want to change an answer.
+
+**If they want to change an answer from step 2**, run `candidates` again, show the new list, and run `collect` with all their answers. Then run `status`: parts of the year that changed need reading again, and an old story is set aside.
 
 ## Three rules that hold throughout
 

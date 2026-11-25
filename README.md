@@ -6,7 +6,7 @@ Your page is private. It is saved on your computer and, unless you say "don't pu
 
 ![A slide from the example: a large number on a green card, above the start of the story](example/screenshot.png)
 
-That is the start of a made-up example. To see the rest, open [`example/recap.html`](example/recap.html), choose the download button, and open the file in a browser.
+That is the start of a made-up example. To see the rest, open [`example/recap.html`](example/recap.html) on GitHub, click the download icon at the top right of the file, and open the downloaded file in a browser.
 
 ## What you need
 
@@ -41,6 +41,8 @@ claude plugin marketplace add bronsonelliott/year-recap
 claude plugin install year-recap@year-recap
 ```
 
+Then start a new session.
+
 </details>
 
 <details>
@@ -60,23 +62,23 @@ Start a new session in any folder and say:
 
 > Make my year recap.
 
-For an earlier year, name it: "Make my 2025 recap." If Claude doesn't seem to know what you mean, type `/year-recap:year-recap` (or `/year-recap` if you installed without the plugin system).
+For an earlier year, name it: "Make my 2025 recap." If Claude doesn't seem to know what you mean, type `/year-recap:year-recap` (or `/year-recap` if you installed without the plugin system). Claude should start by telling you what history it found.
 
-Claude Code will ask permission to run `recap.py` and to read and write in `~/.claude-year-recap`. Those are the skill's own command and folder, and it can't make a recap without them.
+Claude Code will ask permission to run `recap.py` and to read and write in `~/.claude-year-recap`. Those are the skill's own command and folder, and it can't make a recap without them. It may ask more than once.
 
-**It stops twice to ask you something.**
+**It stops twice for your decisions.** If you run it in January, it first asks which year you mean.
 
-1. **How big the job is.** Claude tells you what history it found and about how much of your plan the reading will use: roughly 500 tokens (pieces of words) for each session and 30 for each thing you typed. Say yes or no. If you say no, nothing has been saved. Type `/usage` to see what is left of your plan.
+1. **How big the job is.** Claude tells you what history it found and about how much of your plan the reading will use: roughly 500 tokens (pieces of words) for each session and 30 for each thing you typed. Say yes or no. If you say no, nothing has been saved. This is also where it reminds you the page will be published privately, and you can say "don't publish it." Type `/usage` to see what is left of your plan.
 
 2. **What wasn't you.** Claude lists sessions that look automated, such as a nightly script, and gives each a label. It does the same for commits (saved changes to code) and for the email addresses on them. Answer with the labels:
 
    > a1 and c1 were automated, a2 was me, and e1 is my email.
 
-   If you're not sure about one, say so and Claude will tell you more. To change an answer later, say "go back to the automated list."
+   If you're not sure about one, say so and Claude will tell you more. It also asks whether you have notes or a changelog to include. To change an answer later, say "go back to the automated list." Some of your year may then need reading again.
 
-**You can stop any time.** Close the session whenever you like. What Claude has read so far is kept. To go on, say "continue my year recap" in any session.
+**Then it reads.** Claude goes through your history in parts, which can take a while for a busy year, and offers to pause along the way. You can also stop any time: close the session whenever you like. What Claude has read so far is kept. To go on, say "continue my year recap" in any session.
 
-**At the end** Claude gives you a link to the page, if it was published, and a list of things to check before you share it. The page is also a file, `recap.html`, in a folder named for the year inside `~/.claude-year-recap`. To open it, run this with your year:
+**At the end** Claude gives you a link to the page, if it was published, and a list of things to check before you share it. The page is also a file, `recap.html`, in a folder named for the year inside `~/.claude-year-recap`. To open it, run this, replacing 2026 with your year:
 
 ```bash
 open ~/.claude-year-recap/2026/recap.html
@@ -93,11 +95,11 @@ To change any wording, including names shown under a lesson's sources, ask Claud
 | Your Claude Code sessions | `~/.claude/projects` |
 | What you typed into Claude Code | `~/.claude/history.jsonl` |
 | Daily activity totals | `~/.claude/stats-cache.json` |
-| Cowork sessions, on a Mac | `~/Library/Application Support/Claude/local-agent-mode-sessions` |
+| Sessions from Cowork, the part of the Claude desktop app that works on files for you | `~/Library/Application Support/Claude/local-agent-mode-sessions` |
 | Your own git commits | the folders you used Claude Code in, and up to four levels inside them |
 | Notes or a changelog | only files you name |
 
-Anything you don't have is skipped. Cowork is the part of the Claude desktop app that works on files for you.
+Anything you don't have is skipped.
 
 **It reads every session** except the automated ones you confirm. There is no setting to skip a folder or topic.
 
@@ -122,7 +124,7 @@ To keep transcripts longer from now on, ask Claude Code: "Set cleanupPeriodDays 
 ## How it stays honest
 
 - Code does the counting, and fills in every number on the slides.
-- Every "worked" or "didn't work" lesson has to cite sessions, prompts, commits or notes. Tap one to see them. If one has no source, the page isn't made until Claude fixes it.
+- Every "worked" or "didn't work" lesson has to cite sessions, prompts, commits or notes. Click or tap one to see them. If one has no source, the page isn't made until Claude fixes it.
 - If part of your year hasn't been read yet, the page says so.
 
 ## Known limits
@@ -157,6 +159,8 @@ If you installed without the plugin system, remove it with this instead:
 rm -r ~/.claude/skills/year-recap
 ```
 
+If it says there is no such folder, it was already gone.
+
 Your recaps stay until you delete them. This deletes every year's page and everything saved for it, so copy out any `recap.html` you want first. It prints nothing.
 
 ```bash
@@ -167,7 +171,7 @@ A page published to claude.ai is separate. Delete it there.
 
 ## For developers
 
-From the project's folder, run the tests. They should end with `OK`.
+Download or clone this project, and from its folder run the tests. They should end with `OK`.
 
 ```bash
 python3 -m unittest discover -s tests

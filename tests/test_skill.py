@@ -111,6 +111,18 @@ class WholeRun(FakeHome):
         self.assertIn("nothing to recap", text)
         self.assertNotIn("Estimated", text)
 
+    def test_changing_an_answer_later(self):
+        self.history_of_a_year()
+        self.run_command("candidates")
+        self.run_command("collect")
+        folder = condense.working_folder(self.home, 2026)
+        for batch in load(folder / "run.json")["batches"]:
+            condense.notes_file(folder, batch["name"]).write_text("notes")
+            self.run_command("read", batch["name"])
+        self.run_command("candidates")
+        self.run_command("collect", "--automated", "a1")
+        self.assertIn("Unread batches, 1 of 11: 2026-11-1", self.run_command("status"))
+
     def test_bad_json_gets_a_plain_message(self):
         self.history_of_a_year()
         self.assertIn("run candidates", self.run_command("collect"))
