@@ -1,0 +1,12 @@
+{
+  "name": "year-recap",
+  "owner": { "name": "bronsonelliott" },
+  "description": "A private year-in-review page built from your own Claude Code history.",
+  "plugins": [
+    {
+      "name": "year-recap",
+      "source": "./",
+      "description": "Ask Claude Code for your year and get a private page about it: fun slides, the story, and the lessons."
+    }
+  ]
+}

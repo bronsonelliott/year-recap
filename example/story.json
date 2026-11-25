@@ -1,0 +1,50 @@
+{
+  "title": "The Year of One Bed at a Time",
+  "opening": "Pat started the year asking how a vegetable bed works and finished it with a planner that gets used every week. The middle was messier than that. This is an invented example.",
+  "slides": [
+    {"stat": "messages", "headline": "You had questions"},
+    {"stat": "busiest_hour", "headline": "Mostly before breakfast", "note": "The tomatoes were awake too."},
+    {"stat": "longest_streak", "headline": "One long run in May"},
+    {"stat": "top_projects", "headline": "Where the year went"},
+    {"stat": "active_days", "headline": "You kept coming back"}
+  ],
+  "chapters": [
+    {
+      "title": "Asking before digging",
+      "months": ["2026-01", "2026-02", "2026-03"],
+      "text": ["Most of the winter was questions about soil, frost dates and what grows next to what. Only the typed prompts survive, so this part is a sketch."],
+      "evidence": ["P0001", "P0014"]
+    },
+    {
+      "title": "The planner that planned everything",
+      "months": ["2026-04", "2026-05"],
+      "text": ["April's planner covered every bed, every season and the compost. It was never finished.", "In May Pat threw it out and built a planner for one bed. That one was done in a weekend."],
+      "changed": "Pat began starting with the smallest version that would be useful on its own.",
+      "evidence": ["S0003", "S0011", "C0002"]
+    },
+    {
+      "title": "Water, then quiet",
+      "months": ["2026-06", "2026-07"],
+      "text": ["June was the pond and a lot of arithmetic about liners. No records survive for July."],
+      "evidence": ["S0019"]
+    },
+    {
+      "title": "Making it for other people",
+      "months": ["2026-08", "2026-09", "2026-10", "2026-11"],
+      "text": ["The garden club asked for a newsletter, and the template from August produced the first issue two days into September.", "By October the same habit had reached the recipes."],
+      "changed": "Work started going to other people, so it had to be clear enough to hand over.",
+      "evidence": ["S0027", "C0009", "S0035"]
+    }
+  ],
+  "lessons": {
+    "worked": [
+      {"claim": "Building one bed first got the planner finished.", "evidence": ["S0011", "C0002"]},
+      {"claim": "A template made the newsletter quick.", "evidence": ["S0027", "C0009"]}
+    ],
+    "didnt": [
+      {"claim": "Planning every bed at once stalled for a month.", "evidence": ["S0003"]},
+      {"claim": "Winter questions were asked more than once, because the answers weren't kept.", "evidence": ["P0001", "P0014"]}
+    ],
+    "carry": ["Start with one bed.", "Write answers down where they will be found.", "Finish the small version before drawing the big one."]
+  }
+}

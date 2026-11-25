@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>The Year of One Bed at a Time</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: a poster-like slide deck on top, then one reading column with a month tape
+   down the side. Bold color lives in the slides only; the story stays quiet. */
+:root {
+  --ground: #eff2f0; --sheet: #fafcfb; --ink: #16231e; --soft: #55655e; --line: #cbd5d0; --accent: #0b6a54;
+  --s1: #0b6a54; --s2: #6a2c5b; --s3: #b4531a; --s4: #1f4e86; --s5: #7a1f2e; --s6: #3d4a1c; --on-slide: #fbfdfc;
+  --display: "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --data: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #101714; --sheet: #18221d; --ink: #e6efea; --soft: #9fb1a8; --line: #31413a; --accent: #5cc7a5; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #101714; --sheet: #18221d; --ink: #e6efea; --soft: #9fb1a8; --line: #31413a; --accent: #5cc7a5; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 17px/1.6 var(--body); }
+.wrap {
+  max-width: 46rem; margin: 0 auto; padding-block: 1.5rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 2.5rem;
+}
+h1, h2, h3, p { margin: 0; overflow-wrap: anywhere; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; }
+h1 { font-size: 2.6rem; font-weight: 800; }
+h2 { font-size: 1.8rem; font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+.data { font: 0.8rem/1.5 var(--data); color: var(--soft); overflow-wrap: anywhere; }
+button { font: 600 1rem var(--body); cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.deck { display: flex; flex-direction: column; gap: 0.75rem; }
+.slide {
+  min-height: 25rem; padding: 2rem; border-radius: 4px; background: var(--s1); color: var(--on-slide); cursor: pointer;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem;
+}
+.slide:nth-child(6n+2) { background: var(--s2); } .slide:nth-child(6n+3) { background: var(--s3); }
+.slide:nth-child(6n+4) { background: var(--s4); } .slide:nth-child(6n+5) { background: var(--s5); }
+.slide:nth-child(6n+6) { background: var(--s6); }
+.slide .headline { font: 600 1.5rem/1.1 var(--display); text-wrap: balance; }
+.slide .value { font: 800 clamp(3.2rem, 15vw, 7rem)/0.95 var(--display); overflow-wrap: anywhere; }
+.slide .value.long { font-size: clamp(2.4rem, 9vw, 4.5rem); }
+.slide ol { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: 0.4rem; }
+.slide li { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgb(255 255 255 / 0.35); padding-bottom: 0.4rem; }
+.slide li span { min-width: 0; overflow-wrap: anywhere; } .slide li b { font-variant-numeric: tabular-nums; }
+.slide .covers { font: 0.8rem var(--data); opacity: 0.9; }
+.controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.controls button { background: none; color: var(--accent); border: 2px solid var(--accent); border-radius: 4px; padding: 0.5rem 1rem; }
+.controls button[disabled] { opacity: 0.35; cursor: default; }
+
+.notice { border: 2px solid var(--accent); padding: 0.9rem 1.1rem; background: var(--sheet); }
+.opening { display: flex; flex-direction: column; gap: 0.9rem; }
+.chapter { display: flex; flex-direction: column; gap: 1rem; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
+.tape { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+.tape li { display: flex; align-items: center; gap: 0.5rem; font: 0.8rem var(--data); color: var(--soft); }
+.tape i { width: 2.2rem; height: 0.8rem; border: 1.5px solid var(--accent); display: block; flex: none; }
+.tape .full i { background: var(--accent); }
+.tape .partial i { background: repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 7px); }
+.tape .none i { border-style: dashed; border-color: var(--soft); }
+.changed { background: var(--sheet); padding: 0.9rem 1.1rem; }
+.lessons { display: flex; flex-direction: column; gap: 2rem; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
+.lessons section { display: flex; flex-direction: column; gap: 0.75rem; }
+.lessons ul { margin: 0; padding-left: 1.2rem; }
+details { background: var(--sheet); border-bottom: 1px solid var(--line); padding: 0.8rem 1rem; }
+summary { cursor: pointer; } summary .data { display: block; }
+details ul { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+@media (max-width: 480px) { h1 { font-size: 2.1rem; } .slide { min-height: 22rem; padding: 1.4rem; } }
+</style>
+
+<main class="wrap">
+  <section class="deck" aria-label="Your year in slides">
+    <div id="slides" aria-live="polite">
+<article class="slide"><p class="headline">You had questions</p><div><p class="value">2,316</p><p>things you asked or said</p></div><div><p class="covers">January to June, August to November</p></div></article>
+<article class="slide"><p class="headline">Mostly before breakfast</p><div><p class="value">6 am</p><p>your most common hour</p></div><div><p>The tomatoes were awake too.</p><p class="covers">January to June, August to November</p></div></article>
+<article class="slide"><p class="headline">One long run in May</p><div><p class="value">12 days</p><p>longest run of days in a row</p></div><div><p class="covers">January to June, August to November</p></div></article>
+<article class="slide"><p class="headline">Where the year went</p><div><ol><li><span>garden/planner</span><b>640</b></li><li><span>garden/pond</span><b>388</b></li><li><span>recipes</span><b>251</b></li><li><span>club-newsletter</span><b>190</b></li><li><span>home folder</span><b>84</b></li></ol><p>where you spent your messages</p></div><div><p class="covers">January to June, August to November</p></div></article>
+<article class="slide"><p class="headline">You kept coming back</p><div><p class="value">143</p><p>days you worked with Claude</p></div><div><p class="covers">January to June, August to November</p></div></article>
+    </div>
+    <div class="controls" id="controls" hidden>
+      <button id="back" type="button">Back</button>
+      <span class="data" id="place"></span>
+      <button id="next" type="button">Next</button>
+    </div>
+  </section>
+
+  <header class="opening" id="year" tabindex="-1">
+    <p class="data">Year-end recap | January 1, 2026 to November 20, 2026</p>
+    <h1>The Year of One Bed at a Time</h1>
+    <p>Pat started the year asking how a vegetable bed works and finished it with a planner that gets used every week. The middle was messier than that. This is an invented example.</p>
+  </header>
+
+
+<article class="chapter"><ul class="tape"><li class="partial"><i></i>January: partial detail</li><li class="partial"><i></i>February: partial detail</li><li class="partial"><i></i>March: partial detail</li></ul><h2>Asking before digging</h2><p>Most of the winter was questions about soil, frost dates and what grows next to what. Only the typed prompts survive, so this part is a sketch.</p><details><summary>Sources for this chapter <span class="data">from prompts alone</span></summary><ul><li class="data">January 11, 2026 | prompts | garden | 9 typed prompts, no transcript</li><li class="data">February 22, 2026 | prompts | garden | 14 typed prompts, no transcript</li></ul></details></article>
+<article class="chapter"><ul class="tape"><li class="full"><i></i>April: full detail</li><li class="full"><i></i>May: full detail</li></ul><h2>The planner that planned everything</h2><p>April&#x27;s planner covered every bed, every season and the compost. It was never finished.</p><p>In May Pat threw it out and built a planner for one bed. That one was done in a weekend.</p><div class="changed"><h3>What changed</h3><p>Pat began starting with the smallest version that would be useful on its own.</p></div><details><summary>Sources for this chapter</summary><ul><li class="data">April 4, 2026 | session | garden/planner | Plan every bed at once</li><li class="data">May 9, 2026 | session | garden/planner | Start over with one bed</li><li class="data">May 10, 2026 | commit | planner | One bed, start to finish</li></ul></details></article>
+<article class="chapter"><ul class="tape"><li class="full"><i></i>June: full detail</li><li class="none"><i></i>July: no records found</li></ul><h2>Water, then quiet</h2><p>June was the pond and a lot of arithmetic about liners. No records survive for July.</p><details><summary>Sources for this chapter</summary><ul><li class="data">June 13, 2026 | session | garden/pond | Pond liner arithmetic</li></ul></details></article>
+<article class="chapter"><ul class="tape"><li class="full"><i></i>August: full detail</li><li class="full"><i></i>September: full detail</li><li class="full"><i></i>October: full detail</li><li class="full"><i></i>November: full detail</li></ul><h2>Making it for other people</h2><p>The garden club asked for a newsletter, and the template from August produced the first issue two days into September.</p><p>By October the same habit had reached the recipes.</p><div class="changed"><h3>What changed</h3><p>Work started going to other people, so it had to be clear enough to hand over.</p></div><details><summary>Sources for this chapter</summary><ul><li class="data">August 30, 2026 | session | club-newsletter | Newsletter template</li><li class="data">September 2, 2026 | commit | newsletter | First issue from the template</li><li class="data">October 18, 2026 | session | recipes | Put recipes in one file</li></ul></details></article>
+
+  <section class="lessons">
+    <h2>Lessons</h2>
+    <section><h3>What worked</h3>
+<details><summary>Building one bed first got the planner finished. <span class="data">2 sources</span></summary><ul><li class="data">May 9, 2026 | session | garden/planner | Start over with one bed</li><li class="data">May 10, 2026 | commit | planner | One bed, start to finish</li></ul></details>
+<details><summary>A template made the newsletter quick. <span class="data">2 sources</span></summary><ul><li class="data">August 30, 2026 | session | club-newsletter | Newsletter template</li><li class="data">September 2, 2026 | commit | newsletter | First issue from the template</li></ul></details>
+    </section>
+    <section><h3>What didn't</h3>
+<details><summary>Planning every bed at once stalled for a month. <span class="data">1 source</span></summary><ul><li class="data">April 4, 2026 | session | garden/planner | Plan every bed at once</li></ul></details>
+<details><summary>Winter questions were asked more than once, because the answers weren&#x27;t kept. <span class="data">from prompts alone, 2 sources</span></summary><ul><li class="data">January 11, 2026 | prompts | garden | 9 typed prompts, no transcript</li><li class="data">February 22, 2026 | prompts | garden | 14 typed prompts, no transcript</li></ul></details>
+    </section>
+    <section><h3>What to carry forward</h3>
+      <ul>
+<li>Start with one bed.</li>
+<li>Write answers down where they will be found.</li>
+<li>Finish the small version before drawing the big one.</li>
+      </ul>
+    </section>
+  </section>
+
+  <p class="data">Built from your own history on this computer. Tap a lesson to see what it rests on. 3 lines of history couldn&#x27;t be read.</p>
+</main>
+
+<script>
+// Slides move by tap, click, the buttons, or the arrow keys.
+// Without this script every slide is simply shown, one after another.
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var back = document.getElementById("back");
+  var next = document.getElementById("next");
+  var place = document.getElementById("place");
+  var current = 0;
+
+  function show(number) {
+    current = Math.max(0, Math.min(slides.length - 1, number));
+    slides.forEach(function (slide, i) { slide.hidden = i !== current; });
+    back.disabled = current === 0;
+    next.textContent = current === slides.length - 1 ? "Read your year" : "Next";
+    place.textContent = (current + 1) + " of " + slides.length;
+  }
+
+  function forward() {
+    if (current < slides.length - 1) { show(current + 1); return; }
+    var year = document.getElementById("year");
+    var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    year.scrollIntoView({ behavior: calm ? "auto" : "smooth" });
+    year.focus({ preventScroll: true });
+  }
+
+  slides.forEach(function (slide) { slide.addEventListener("click", forward); });
+  next.addEventListener("click", forward);
+  back.addEventListener("click", function () { show(current - 1); });
+  document.addEventListener("keydown", function (event) {
+    if (event.altKey || event.ctrlKey || event.metaKey) { return; }
+    // Only while the slides are on screen, so reading the story isn't interrupted.
+    if (next.getBoundingClientRect().bottom < 0) { return; }
+    if (event.key === "ArrowRight") { forward(); }
+    if (event.key === "ArrowLeft") { show(current - 1); }
+  });
+  document.getElementById("controls").hidden = false;
+  show(0);
+})();
+</script>
+
+</body>
+</html>

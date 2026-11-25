@@ -4,7 +4,6 @@ MEMORY.md
 
 # Real history and generated recaps never belong here
 *.jsonl
-!tests/fixtures/**/*.jsonl
 recap*.html
 !example/recap.html
 story*.json
