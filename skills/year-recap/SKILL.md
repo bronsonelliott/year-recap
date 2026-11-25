@@ -33,7 +33,7 @@ If that path wasn't filled in above, use the full path of the folder this file i
 
 ### 1. Size the job, then stop
 
-Run `scan`. If it prints `ASK`, put that question to the person first. If it says there is nothing to recap, tell them and stop. Tell them in plain words what was found, what is missing, and about how much of their Claude plan the reading uses. If their transcript retention is 30 days, explain that Claude Code deletes transcripts after 30 days by default, so older months rest on typed prompts, commits and notes, and that raising `cleanupPeriodDays` in `~/.claude/settings.json` keeps them longer. Don't change their settings.
+Run `scan`. If it prints `ASK`, put that question to the person first. If it says there is nothing to recap, tell them and stop. Tell them in plain words what was found, what is missing, and about how much of their Claude plan the reading uses. If their transcript retention is 30 days, explain that Claude Code deletes transcripts after 30 days by default, except sessions started or last continued in the Claude desktop app, which recent versions keep. Older months may rest on typed prompts, commits and notes, and that raising `cleanupPeriodDays` in `~/.claude/settings.json` keeps them longer. Don't change their settings.
 
 Say that the finished page will be published privately to their claude.ai account, and that they can say "don't publish it" to get only a file. Whether or not it printed `ASK`, ask if they want to go ahead. If they say no, stop. Nothing has been read or saved.
 

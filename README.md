@@ -117,7 +117,7 @@ The filter for passwords and keys can also miss things: an unusual format, or a 
 
 ## Why early months can be thin
 
-Claude Code deletes session transcripts after 30 days unless you change a setting. What you typed is kept, so the recap can still tell those months with less detail. Each month on the page shows how much survived.
+Claude Code deletes session transcripts after 30 days unless you change a setting. Sessions you started or last continued in the Claude desktop app are the exception: recent versions keep those. What you typed is kept either way, so the recap can still tell those months with less detail. Each month on the page shows how much survived.
 
 To keep transcripts longer from now on, ask Claude Code: "Set cleanupPeriodDays to 365 in my user settings." It applies to new sessions and can't bring back what is already deleted. The recap never changes your settings.
 
